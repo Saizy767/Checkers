@@ -1,0 +1,29 @@
+@import "../../styles/_export.scss";
+
+.cell{
+    width: $sizeCell;
+    height: $sizeCell;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &_white{
+        @extend .cell;
+        background-color: rgb(238, 174, 91);
+    }
+    &_black{
+        @extend .cell;
+        background-color: rgb(19, 16, 34);
+    }
+    &__figure{
+        cursor: pointer;
+    }
+    &_available{
+        height: 12%;
+        width: 12%;
+        border-radius: 50%;
+        background-color: greenyellow;
+    }
+    &.selected{
+        background-color: #be291f;
+    }
+}

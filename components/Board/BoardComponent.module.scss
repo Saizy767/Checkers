@@ -1,0 +1,15 @@
+@import "../../styles/_export.scss";
+
+.board{
+    position: absolute;
+    width: $sizeCell * 8;
+    height: $sizeCell * 8;
+    display: flex;
+    flex-wrap: wrap;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-sizing: content-box;
+    border: 20px #6c361f solid;
+    border-radius: 3px;
+}
