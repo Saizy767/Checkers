@@ -1,4 +1,4 @@
-@import "../../styles/_export.scss";
+@import "../../styles/variables";
 
 .board{
     position: absolute;
@@ -12,4 +12,19 @@
     box-sizing: content-box;
     border: 20px #6c361f solid;
     border-radius: 3px;
+    @media screen and (min-width:1920px) {
+        width: $sizeCellBigMonitor * 8;
+        height: $sizeCellBigMonitor * 8;
+        border: 22px #6c361f solid;
+    }
+    @media screen and (max-width: 600px) {
+        width: $sizeCellMobile * 8;
+        height: $sizeCellMobile * 8;
+        border: 10px #6c361f solid;
+    }
+    @media screen and (max-width:450px) {
+        width: $sizeCellMobileMini * 8;
+        height: $sizeCellMobileMini * 8;
+        border: 8px #6c361f solid;
+    }
 }

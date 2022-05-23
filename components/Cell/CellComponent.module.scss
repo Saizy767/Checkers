@@ -1,4 +1,4 @@
-@import "../../styles/_export.scss";
+@import "../../styles/variables";
 
 .cell{
     width: $sizeCell;
@@ -6,6 +6,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    @media screen and (min-width:1920px) {
+        width: $sizeCellBigMonitor;
+        height: $sizeCellBigMonitor
+    }
+    @media screen and (max-width:600px) {
+        width: $sizeCellMobile;
+        height: $sizeCellMobile;
+    }
+    @media screen and (max-width: 450px) {
+        width: $sizeCellMobileMini;
+        height: $sizeCellMobileMini;
+    }
     &_white{
         @extend .cell;
         background-color: rgb(238, 174, 91);
@@ -13,9 +25,6 @@
     &_black{
         @extend .cell;
         background-color: rgb(19, 16, 34);
-    }
-    &__figure{
-        cursor: pointer;
     }
     &_available{
         height: 12%;
@@ -25,5 +34,8 @@
     }
     &.selected{
         background-color: #be291f;
+    }
+    &.pointer{
+        cursor: pointer;
     }
 }
