@@ -38,7 +38,7 @@ export class Basic extends Figure{
         &&  this.cell.board.getCells(target.x, target.y).isEmpty()
         &&  this.cell.isEnemy(this.cell.board.getCells(this.cell.x + 1, 
                                                        this.cell.y + direction))){
-            return true              
+            return true;
         }
         if(             // Attack right back
         (target.y === this.cell.y - direction * 2)
@@ -55,7 +55,7 @@ export class Basic extends Figure{
         &&  this.cell.isEnemy(this.cell.board.getCells(this.cell.x - 1, 
                                                         this.cell.y - direction))){
             return true              
-        }
+    }
       
         return false
 
