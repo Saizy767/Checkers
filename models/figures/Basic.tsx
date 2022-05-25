@@ -14,6 +14,8 @@ export class Basic extends Figure{
 
     canMove(target: Cell): boolean {
         const direction = this.cell.figure?.color === Colors.BLACK ? 1 : -1
+        const dy = this.cell.y < target.y ? 1 : -1
+        const dx= this.cell.x < target.x ? 1 : -1
 
         if(!super.canMove(target)){
             return false;
@@ -24,38 +26,13 @@ export class Basic extends Figure{
         && (this.cell.board.getCells(target.x, target.y)).isEmpty()){
             return true
         }
-        if(             // Attack left up
-        (target.y === this.cell.y + direction * 2) 
-        &&  (target.x === this.cell.x - 2)
-        &&  this.cell.board.getCells(target.x, target.y).isEmpty()
-        &&  this.cell.isEnemy(this.cell.board.getCells(this.cell.x - 1, 
-                                                       this.cell.y + direction))){
-            return true
+        if(
+            (target.y === this.cell.y + dy * 2)
+            &&  (target.x === this.cell.x + (2 * dx)) 
+            &&  this.cell.board.getCells(target.x, target.y).isEmpty()
+            &&  this.cell.isEnemy(this.cell.board.getCells(this.cell.x + 1 * dx, this.cell.y + dy))){
+                return true
         }
-        if(             // Attack right up
-        (target.y === this.cell.y + direction * 2)
-        &&  (target.x === this.cell.x + 2)
-        &&  this.cell.board.getCells(target.x, target.y).isEmpty()
-        &&  this.cell.isEnemy(this.cell.board.getCells(this.cell.x + 1, 
-                                                       this.cell.y + direction))){
-            return true;
-        }
-        if(             // Attack right back
-        (target.y === this.cell.y - direction * 2)
-        &&  (target.x === this.cell.x + 2)
-        &&  this.cell.board.getCells(target.x, target.y).isEmpty()
-        &&  this.cell.isEnemy(this.cell.board.getCells(this.cell.x + 1, 
-                                                        this.cell.y - direction))){
-            return true              
-        }
-        if(             // Attack left back
-        (target.y === this.cell.y - direction * 2)
-        &&  (target.x === this.cell.x - 2)
-        &&  this.cell.board.getCells(target.x, target.y).isEmpty()
-        &&  this.cell.isEnemy(this.cell.board.getCells(this.cell.x - 1, 
-                                                        this.cell.y - direction))){
-            return true              
-    }
       
         return false
 

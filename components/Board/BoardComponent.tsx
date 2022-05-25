@@ -1,15 +1,18 @@
-import React, { FC, useCallback, useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Board } from "../../models/Board";
 import { Cell } from "../../models/Cell";
+import { Player } from "../../models/Player";
 import CellComponent from "../Cell/CellComponent";
 
 import styles from './BoardComponent.module.scss'
 
 interface BoardComponentProps{
     board: Board,
-    setBoard: (board:Board)=>void
+    setBoard: (board:Board)=>void,
+    currentPlayer: Player | null,
+    swapPlayer: ()=>void
 }
-const BoardComponent: FC<BoardComponentProps>=({board,setBoard})=>{
+const BoardComponent: FC<BoardComponentProps>=({board,setBoard, currentPlayer, swapPlayer})=>{
     const [selectedCell, setSelectedCell]= useState<Cell | null>(null)
 
     useEffect(()=>{
@@ -27,21 +30,23 @@ const BoardComponent: FC<BoardComponentProps>=({board,setBoard})=>{
         setBoard(newBoard)
     }
 
-    const handleCellClick = useCallback((cell:Cell) =>{
-        if(selectedCell && selectedCell !== cell && selectedCell.moveFigure(cell)){
-            selectedCell.moveFigure(cell)
-            setSelectedCell(null)
+    function handleCellClick(cell:Cell){
+        if (selectedCell && selectedCell !== cell && selectedCell.figure?.canMove(cell)) {
+            selectedCell.moveFigure(cell);
+            swapPlayer()
+            setSelectedCell(null);
             updateBoard()
         }
         else{
-            setSelectedCell(cell)
+            if(cell.figure?.color === currentPlayer?.color ){
+                setSelectedCell(cell)
+                
+            }
         }
-        if(cell.figure){
-            setSelectedCell(cell)
-        }
-    },[selectedCell])
-
+    }
     return(
+        <>
+        <h3>{currentPlayer?.color}</h3>
         <div className={styles.board}>
             {board.cells.map((row, index)=>
                     <React.Fragment key={index}>
@@ -54,6 +59,7 @@ const BoardComponent: FC<BoardComponentProps>=({board,setBoard})=>{
                     </React.Fragment> 
             )}
         </div>
+        </>
     )
 }
 

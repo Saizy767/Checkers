@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React, { FC } from "react";
 import { Cell } from "../../models/Cell";
+import { Colors } from "../../models/Colors";
 import styles from './CellComponent.module.scss'
 
 interface CellProps{
@@ -11,7 +12,7 @@ interface CellProps{
 const CellComponent: FC<CellProps>=({cell, selected, handleCellClick})=>{
     return(
         <div className={`${styles.cell} 
-                        ${cell.color === "white" ? styles.cell_white : styles.cell_black}
+                        ${cell.color === Colors.WHITE ? styles.cell_white : styles.cell_black}
                         ${selected && cell.figure ? styles.selected : ''}
                         ${cell.figure? styles.pointer: ''}`}
                         onClick={()=>handleCellClick(cell)} 
